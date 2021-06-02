@@ -32,3 +32,25 @@ button {
   width: 150px;
   height: 40px;
 }
+
+/* menu */
+.bar {
+  width: 40px;
+  height: 5px;
+  background-color: #fff; 
+  position: relative;
+  left : 20px;
+  top: 20px
+}
+
+#nav {
+   cursor: pointer;
+   width: 50px;
+   height: 50px;
+}
+.top {
+  margin-bottom: 6px; 
+}
+.bottom {
+   margin-top: 6px;
+}
