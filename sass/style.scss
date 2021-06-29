@@ -1,0 +1,87 @@
+@import 'header';
+
+$fontSize: 18px; //數值
+$headerH: 120px;
+$h1: 48px;
+$h2: 40px;
+$h3: 36px;
+$h4: 24px;
+$h5: 18px;
+$bgc: pink; //顏色
+$fontFamily: '微軟正黑'; //字串
+$list: 10px 20px 10px; //列表
+$map: (
+  'key': 'value',
+  'h1': '48px'
+); // map
+
+$boolean: true;
+$null: null;
+
+
+
+.title{
+  font-size: map-get($map , h1);
+  background-color: $null;
+}
+
+.title::after{
+  content: '文字'; // 字串
+  display: block; // 數值
+}
+
+
+
+body {
+  background-color: $bgc;
+  font-size: $fontSize;
+  font-family: $fontFamily;
+  margin: $list;
+}
+
+h1{
+  font-size: $h1;
+}
+
+h2{
+  font-size: $h2;
+}
+
+h3{
+  font-size: $h3;
+}
+
+h4{
+  font-size: $h4;
+}
+
+h5{
+  font-size: $h5;
+}
+
+header{
+  height: $headerH;
+  width: 100%;
+}
+
+// 變數位置
+$width: 100px; //全域變數
+
+.model{
+  $width: 20px !default; // 區域變數，加!default會讓外面的變數比裡面還大
+  width: $width;
+}
+
+body{
+  .wrapper{
+    header{
+      height: 120px;
+      logo{
+        width: 100px;
+      }
+    }
+    footer{
+      height: 300px;
+    }
+  }
+}
