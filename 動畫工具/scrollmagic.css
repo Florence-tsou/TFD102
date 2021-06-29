@@ -1,0 +1,50 @@
+body{
+  background-color: rgb(41, 41, 41);
+  color: #fff;
+  overflow-x: hidden;
+}
+section {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 3px;
+}
+
+.gray {
+  background-color: rgb(225, 225, 225);
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: rgb(0, 255, 170);
+}
+
+.scene_03 {
+  transition: .5s all ease-in-out;
+}
+.on {
+  background-color: rgb(255, 250, 115);
+}
+
+.scene_04 {
+  background-image: url("https://placem.at/person");
+  background-size: cover; 
+  display: initial;
+}
+
+.scene_04 .rect {
+  width: 100vw;
+  height: 25vh;
+  position: relative;
+  margin-bottom: 5px;
+  font-size: 20px;
+  background-color: #d7ff7a;  
+}

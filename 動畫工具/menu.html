@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <title>menu</title>
+</head>
+<body>
+
+  <div id="nav">
+    <div class="bar top"></div>
+    <div class="bar middle"></div>
+    <div class="bar bottom"></div>
+  </div>
+
+  <script>
+
+    // 動畫
+    var timenu = new TimelineMax();
+
+    var top_mv = TweenMax.to('.top' , 1 , {
+      y: '11px',
+      rotation: 45
+    })
+
+    var middle_mv = TweenMax.to('.middle' , 1 , {
+      opacity: 0,
+      x: 100
+    })
+
+    var bottom_mv = TweenMax.to('.bottom' , 1 , {
+      y: '-11px',
+      rotation: -45
+    })
+
+    // timelinemax 同時執行動畫
+    timenu.add([top_mv , middle_mv , bottom_mv])
+
+    // 控制
+    timenu.stop();
+
+
+    var navv = document.getElementById("nav");
+    navv.addEventListener("mouseover", function(){
+      timenu.play();
+    });
+    navv.addEventListener("mouseout", function(){
+      timenu.reverse();
+    });
+
+  </script>
+  
+</body>
+</html>

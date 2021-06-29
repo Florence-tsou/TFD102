@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <link href="./scrollmagic.css" rel="stylesheet">
+  <!-- gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <!-- scrollmagic -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+  <title>menu</title>
+</head>
+<body>
+  <section class="scene_01">scrollmagic </section>
+  <!-- 觸發點 -->
+  <div id="keypoint"></div>   
+  <section class="scene_02 gray">
+      <div class="box mv01">obj01</div>
+  </section>
+  <!-- 觸發點2 -->
+  <div id="keypoint02"></div>
+  <section  class="scene_03">
+      <div class="box mv02">obj02</div>
+      <div class="box mv03">obj03</div>
+  </section>
+  <!-- 觸發點3 -->
+  <div id="keypoint03"></div>
+  <section class="scene_04 gray">
+      <div class="rect a01"></div>   
+      <div class="rect a02"></div>   
+      <div class="rect a03"></div>   
+      <div class="rect a04"></div>   
+  </section>
+  <section class="scene_05"></section>
+  <section class="scene_06 gray"></section>
+
+
+</body>
+
+
+  <script>
+
+    // 場景初始化 innit
+    var controller = new ScrollMagic.Controller();
+
+    // 執行動畫
+
+    // var mv_01 = TweenMax.fromTo('.mv01' , 1 , {
+    //   y: 0,
+    //   opacity: 0,
+    // },{
+    //   y: 50,
+    //   opacity: 1,
+    //   scale: 2
+    // })
+
+
+    var t1_mv01 = new TimelineMax();
+    t1_mv01.to('.mv01' , 1 , {
+      y: 100,
+    }).to('.mv01' , 1 , {
+      x: 200
+    }).to('.mv01' , 1 , {
+      rotation: 360,
+      scale: 2
+    })
+
+
+    // scroll 觸發事件
+    new ScrollMagic.Scene({
+      triggerElement : '#keypoint' , 
+      offset: 50, // 改變場景的觸發點
+      triggerHook: 0.2, // 改變瀏覽器的觸發點，預設是0.5
+      duration: 400
+
+    }).setTween(t1_mv01).addIndicators().addTo(controller) // addIndicators()找觸發點
+
+
+
+    // 第二個場景
+    var t1_mv02 = TweenMax.to('.mv02' , 1 , {
+      x: 200,
+    })
+
+    var t1_mv03 = TweenMax.to('.mv03' , 1 , {
+      y: 200,
+      scale: 2
+    })
+
+    new ScrollMagic.Scene({
+      triggerElement : '#keypoint02' , 
+      // offset: 50, // 改變場景的觸發點
+      triggerHook: 0.5, // 改變瀏覽器的觸發點，預設是0.5
+      duration: 400
+
+    }).setClassToggle('.scene_03' , 'on').setTween([t1_mv02 , t1_mv03]).addIndicators().addTo(controller) // setClassToggle('.scene_03' , 'on') 觸發加css
+
+
+
+
+    // 第三個場景
+
+    // 動畫
+    var sticky = new TimelineMax();
+    sticky.to('.a01' , 1 , {x: '100%'})
+    .to('.a02' , 1 , {x: '100%'})
+    .to('.a03' , 1 , {x: '100%'})
+    .to('.a04' , 1 , {x: '100%'})
+
+
+    // 觸發事件
+    new ScrollMagic.Scene({
+      triggerElement : '#keypoint03' , 
+      triggerHook: 0, // 改變瀏覽器的觸發點，預設是0.5
+      duration: '400%'
+
+    }).setPin('.scene_04').setTween(sticky).addIndicators().addTo(controller);
+
+
+
+  </script>
+
+</html>

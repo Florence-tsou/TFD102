@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <link href="./fullmenu.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <title>menu</title>
+</head>
+<body>
+
+  <div class="wrapper">
+      <div class="bar">
+          <div class="humbar"></div>
+      </div>
+      <h2>使用gsap製作選單</h2>
+      <!-- 隱藏選單 -->
+      <nav>
+          <div class="close_bar">
+              <div></div>
+          </div>
+          <ul>
+              <li class="item"><a href="#">首頁</a></li>
+              <li class="item"><a href="#">關於我們</a></li>
+              <li class="item"><a href="#">專案</a></li>
+              <li class="item"><a href="#">聯絡我們</a></li>
+          </ul>
+      </nav>
+  </div>
+
+  <script>
+
+    // 動畫
+    var t1 = new TimelineMax();
+    t1.to('nav' , .5 , {
+      right: 0,
+    }).to('nav' , .5 , {
+      height: '100vh',
+    }).staggerTo('nav ul li' , .3 , {
+      opacity: 1,
+    }, .3).to('.close_bar' , .4 , { // 這個.4是A到B點的時間
+      opacity: 1,
+      delay: -.8 // 控制出現時間要用delay
+    })
+
+    // 控制
+    t1.stop();
+
+    var open = document.querySelector('.bar');
+    var close = document.querySelector('.close_bar');
+
+    open.addEventListener("click", function(){
+      t1.play();
+    });
+
+    close.addEventListener("click", function(){
+      t1.reverse();
+    });
+
+
+  </script>
+
+
+</body>
+</html>
