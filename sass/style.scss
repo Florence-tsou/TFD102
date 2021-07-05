@@ -1,4 +1,12 @@
-@import 'header';
+// @import 引入其他檔案，檔名前面加_，才不會被編譯
+// 最後都會被style.scss一起丟去style.css
+@import 'header'; // 引入sass，附檔名建議不寫
+@import 'mixin';
+
+@import url('./font.css'); // 原生css，要附檔名
+
+
+
 
 $fontSize: 18px; //數值
 $headerH: 120px;
@@ -10,10 +18,10 @@ $h5: 18px;
 $bgc: pink; //顏色
 $fontFamily: '微軟正黑'; //字串
 $list: 10px 20px 10px; //列表
-$map: (
+$map: ( // map
   'key': 'value',
   'h1': '48px'
-); // map
+); 
 
 $boolean: true;
 $null: null;
@@ -72,6 +80,7 @@ $width: 100px; //全域變數
   width: $width;
 }
 
+// ========== nesting ==========
 body{
   .wrapper{
     header{
@@ -83,5 +92,225 @@ body{
     footer{
       height: 300px;
     }
+  }
+}
+
+// 偽元素寫法
+// a{
+//   color: red;
+// }
+
+// a:hove{
+//   color: blue;
+// }
+
+a{
+  color: red;
+  &:hover{
+    color: blue;
+  }
+  &::after{
+    content: 'after';
+  }
+  &::before{
+    content: 'before';
+  }
+}
+
+
+
+
+
+
+// 呼叫函式
+.box{
+  @include marginTop(50px);
+  @include marginAuto();
+}
+
+.box01{
+  @include marginTop(10px);
+};
+
+
+
+
+.box_rect{
+  @include rect();
+}
+
+.box_rects{
+  @include rect_new(100vh, 100vh);
+}
+
+
+
+// ========== null ==========
+
+
+.btn-wide{
+  @include btn(150px , 10px , true , rgb(118, 252, 169));
+  margin-bottom: 10px;
+}
+
+.btn-default{
+  @include btn(120px , 10px , false , rgb(90, 134, 228));
+}
+
+
+// 函式
+// @mixin btn($class , $w , $padding , $r , $bgc:null){
+//   #{class}{ // 不建議用這方法
+//     width: $w;
+//     padding: $padding 0;
+//     text-align: center;
+//     cursor: pointer;
+//     border: 1px solid black;
+//     background-color: $bgc;
+  
+//     @if $r == true{
+//       border-radius: 5px;
+//     }
+  
+//     &:hover{
+//       color: red;
+//       // background-color: darken($bgc , 20); //darken變暗
+//       background-color: lighten($bgc , 20); // lighten變亮
+//     }
+
+//   }
+// }
+
+// 呼叫
+// @include btn('.btn-wide' , 150px , 10px , true , rgb(118, 252, 169));
+
+
+@include textbox('.text' , 20px){
+  font-size: 20px;
+};
+
+
+// ========== 字串轉型 ==========
+$fontclass: '.aa'; // clsss
+$attr: margin; // 屬性
+$path: aa; // 路徑名字
+
+#{$fontclass}{
+  #{$attr}: 40px;
+  background-image: url('./images/#{$path}.jpg');
+}
+
+
+
+// 運算（注意單位）+ 運算函式
+
+$var: 10;
+
+.aa{
+  width: $var + 10;
+  height: 10 - 4 + px;
+  margin: 10px * 5;
+  font: round(24 / 18) + px; // 除要加括弧，另外寫單位
+}
+
+$w: 100;
+
+.bb{
+  @if($w <= 50){
+    width: $w + px;
+  }@else if($w <= 70){
+    width: ($w / 2) + px;
+  }@else{
+    width: $w * 2 + pw;
+  }
+}
+
+
+
+// for 迴圈
+
+// grid
+
+@for $i from 1 through 10{
+  .box-#{$i}{
+    width: $i * 1px;
+  }
+}
+
+
+// 運用
+
+
+// @include push(5);
+
+
+
+// @include pushall(2 , top){
+//   display: block;
+// };
+// @include pushall(2 , bottom);
+
+
+
+.row{
+  display: flex;
+  // .col-1{
+  //   width: (1/12) * 100%;
+  // }
+  // .col-2{
+  //   width: (2/12) * 100%;
+  // }
+  // @include grid(18);
+}
+
+
+// 呼叫pushall();
+// @include pushall(20,"top");
+
+// @include margin(100 , top){
+//   @include marginAuto();
+// };
+
+
+
+
+
+// $img: box , a , b; //可不加逗號
+
+@mixin img($img , $style:jpg) { // :預設，未呼叫就用這個
+  @each $a in $img{ // a 從 img 取得
+    .#{$a}{
+      background-image: url("./images/#{$a}.#{$style}");
+      background-repeat: no-repeat;
+      @content;
+    }
+  }
+}
+
+@include img(box a b){ //放裡面不能加逗號
+  width: 100px;
+  height: 80px;
+}
+
+@include img(banner banner2 , png){
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  @include marginAuto();
+}
+
+@include img(icon , png){
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  @include marginAuto();
+}
+
+.wrapper{ // 再包一個 = 這個class也要套用
+  @include img(icon , png){
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+    @include marginAuto();
   }
 }

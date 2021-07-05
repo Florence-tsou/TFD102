@@ -1,0 +1,260 @@
+@charset "UTF-8";
+@import url("./font.css");
+header {
+  border: 1px solid;
+}
+
+.title {
+  font-size: "48px";
+}
+
+.title::after {
+  content: '文字';
+  display: block;
+}
+
+body {
+  background-color: pink;
+  font-size: 18px;
+  font-family: "微軟正黑";
+  margin: 10px 20px 10px;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 36px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+header {
+  height: 120px;
+  width: 100%;
+}
+
+.model {
+  width: 100px;
+}
+
+body .wrapper header {
+  height: 120px;
+}
+
+body .wrapper header logo {
+  width: 100px;
+}
+
+body .wrapper footer {
+  height: 300px;
+}
+
+a {
+  color: red;
+}
+
+a:hover {
+  color: blue;
+}
+
+a::after {
+  content: 'after';
+}
+
+a::before {
+  content: 'before';
+}
+
+.box {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 auto;
+}
+
+.box01 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.box_rect {
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+}
+
+.box_rects {
+  width: 100vh;
+  height: 100vh;
+}
+
+.btn-wide {
+  width: 150px;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: #76fca9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.btn-wide:hover {
+  color: red;
+  background-color: #dafee8;
+}
+
+.btn-default {
+  width: 120px;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: #5a86e4;
+}
+
+.btn-default:hover {
+  color: red;
+  background-color: #b2c6f2;
+}
+
+.text {
+  text-align: center;
+  width: 100px;
+  height: 20px;
+  border: 1px solid #333;
+  font-size: 20px;
+}
+
+.aa {
+  margin: 40px;
+  background-image: url("./images/aa.jpg");
+}
+
+.aa {
+  width: 20;
+  height: 6px;
+  margin: 50px;
+  font: 1px;
+}
+
+.bb {
+  width: 200pw;
+}
+
+.box-1 {
+  width: 1px;
+}
+
+.box-2 {
+  width: 2px;
+}
+
+.box-3 {
+  width: 3px;
+}
+
+.box-4 {
+  width: 4px;
+}
+
+.box-5 {
+  width: 5px;
+}
+
+.box-6 {
+  width: 6px;
+}
+
+.box-7 {
+  width: 7px;
+}
+
+.box-8 {
+  width: 8px;
+}
+
+.box-9 {
+  width: 9px;
+}
+
+.box-10 {
+  width: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.box {
+  background-image: url("./images/box.jpg");
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 80px;
+}
+
+.a {
+  background-image: url("./images/a.jpg");
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 80px;
+}
+
+.b {
+  background-image: url("./images/b.jpg");
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 80px;
+}
+
+.banner {
+  background-image: url("./images/banner.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.banner2 {
+  background-image: url("./images/banner2.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.icon {
+  background-image: url("./images/icon.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.wrapper .icon {
+  background-image: url("./images/icon.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=style.css.map */

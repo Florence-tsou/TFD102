@@ -1,0 +1,109 @@
+// 宣告方式
+@mixin font($size){
+  font-size: $size;
+  font-weight: 300;
+}
+
+@mixin marginTop($val){
+  margin-top: $val;
+  margin-bottom: $val *2;
+  @include font(14px);
+}
+
+@mixin marginAuto(){
+  margin: 0 auto;
+}
+
+@mixin rect($w: 100px , $h: 100px, $bgc: #fff){
+  width: $w;
+  height: $h;
+  background-color: $bgc;
+}
+
+@mixin rect_new($w , $h:$w){
+  width: $w;
+  height: $h;
+}
+
+@mixin btn($w , $padding , $r , $bgc:null){
+  width: $w;
+  padding: $padding 0;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: $bgc;
+
+  @if $r == true{
+    border-radius: 5px;
+  }
+
+  &:hover{
+    color: red;
+    // background-color: darken($bgc , 20); //darken變暗
+    background-color: lighten($bgc , 20); // lighten變亮
+  }
+
+}
+
+
+@mixin textbox($class , $w){
+  #{$class}{ // 不建議這樣用，麻煩
+    text-align: center;
+    @include rect_new($w*5 , $w);
+    border: 1px solid #333;
+    @content; // 若用$class寫法，想要再額外加新css(ex:font-size)就得加這個
+  }
+}
+
+// grid
+@mixin grid($col){
+  @for $i from 1 through $col {
+      .col-#{$i}{
+        width: ( $i / $col ) * 100% ;
+        @content;
+      } 
+  }
+}
+
+// 運用
+@mixin push($num){
+  @for $i from 1 through $num{
+    .push-left-#{$i}{
+      position: relative;
+      left : $i * 1px;
+    }
+    .push-top-#{$i}{
+      position: relative;
+      left : $i * 1px;
+    }
+    .push-bottom-#{$i}{
+      position: relative;
+      left : $i * 1px;
+    }
+    .push-right-#{$i}{
+      position: relative;
+      left : $i * 1px;
+    }
+  }
+
+}
+
+@mixin pushall($num , $dir){
+  @for $i from 1 through $num{
+    .push-#{$dir}-#{$i}{
+      position: relative;
+      #{$dir} : $i * 1px;
+      @content;
+    }
+  }
+};
+
+@mixin margin($num, $dir){
+  @for $i from 1 through $num {
+    .margin-#{$dir}-#{$i} {
+      margin-#{$dir}: $i * 1px;
+      @content;
+    }
+  }
+}
+
