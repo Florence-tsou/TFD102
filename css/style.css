@@ -14,10 +14,9 @@ header {
 }
 
 body {
-  background-color: pink;
-  font-size: 18px;
-  font-family: "微軟正黑";
-  margin: 10px 20px 10px;
+  background-color: #000000;
+  color: white;
+  font-size: 24px;
 }
 
 h1 {
@@ -222,15 +221,6 @@ a::before {
   height: 80px;
 }
 
-.banner {
-  background-image: url("./images/banner.png");
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 180px;
-  background-size: cover;
-  margin: 0 auto;
-}
-
 .banner2 {
   background-image: url("./images/banner2.png");
   background-repeat: no-repeat;
@@ -238,23 +228,51 @@ a::before {
   height: 180px;
   background-size: cover;
   margin: 0 auto;
+  position: relative;
 }
 
-.icon {
-  background-image: url("./images/icon.png");
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 180px;
-  background-size: cover;
+.v1 {
+  width: 100vw;
+  height: 400px;
+  display: block;
+  position: relative;
+  background-color: pink;
+  margin-bottom: 100px;
+}
+
+.wrapper .banner {
+  width: 1200px;
+  height: 500px;
   margin: 0 auto;
 }
 
-.wrapper .icon {
-  background-image: url("./images/icon.png");
+.wrapper .banner .slider1 {
+  background-image: url("./images/slider1.png");
   background-repeat: no-repeat;
-  width: 100%;
-  height: 180px;
+  background-color: #fff;
+  background-repeat: no-repeat;
   background-size: cover;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper .banner .slider2 {
+  background-image: url("./images/slider2.png");
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper .banner .slider3 {
+  background-image: url("./images/slider3.png");
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 /*# sourceMappingURL=style.css.map */

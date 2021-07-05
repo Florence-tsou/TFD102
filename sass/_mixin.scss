@@ -107,3 +107,12 @@
   }
 }
 
+@mixin img($img , $style:jpg) { // :預設，未呼叫就用這個
+  @each $a in $img{ // a 從 img 取得
+    .#{$a}{
+      background-image: url("./images/#{$a}.#{$style}");
+      background-repeat: no-repeat;
+      @content;
+    }
+  }
+}
