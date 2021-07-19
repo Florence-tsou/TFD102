@@ -109,3 +109,20 @@ function copy(){
 };
 
 exports.move = copy;
+
+
+
+
+// include html 
+const fileinclude = require('gulp-file-include');
+
+function html(){
+  return src('*.html') // 根目錄下的所有html
+  .pipe(fileinclude({ // 官方格式，若裡面有include，打包完後會把include的東西串進去
+    prefix: '@@',
+    basepath: '@file'
+  }))
+  .pipe(dest('dist'))
+}
+
+exports.h = html
