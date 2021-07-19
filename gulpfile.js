@@ -51,3 +51,19 @@ exports.tasks = series(missionA , missionB , parallel(missionC , missionD));
 
 // 同時執行任務
 exports.sync = parallel(missionA , missionB);
+
+
+
+
+// uglify.js
+
+const uglify = require('gulp-uglify'); // 先置入官方給的壓縮指令
+
+function ugjs(){
+  // 打包這一支檔案，中間經過pipe壓縮打包，最後產出到minify的資料夾
+  return src('js/scripts.js'). // src 來源檔案
+  pipe(uglify()). // 壓縮、打包檔案
+  pipe(dest('js/minify/')) // dest 目的地
+};
+
+exports.taskjs = ugjs;
