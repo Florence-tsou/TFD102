@@ -83,4 +83,21 @@ function mincss(){
 exports.css = mincss;
 
 // 同時執行壓縮js跟css
-exports.abc = parallel(ugjs , mincss);
+exports.alltask = parallel(ugjs , mincss);
+
+
+
+
+
+// 拷貝多個檔案
+
+function copy(){
+  // return src('sass/*.css') // 打包所有附檔名為css
+  // return src(['sass/*.css' , 'sass/*.scss']) // 打包所有副檔名為css及scss
+  // return src(['sass/*.css' , '!sass/font.css']) //不要被打包的，就在第二個參數寫 !檔名
+  // return src('sass/*.*') // 打包全部檔案，所有附檔名
+  return src('sass/*.*' , 'sass/**/*.scss') // 連其他資料夾裡所有的scss都打包
+  .pipe(dest('css/'))
+};
+
+exports.move = copy;
