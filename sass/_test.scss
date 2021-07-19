@@ -1,0 +1,308 @@
+.title{
+  font-size: map-get($map , h1);
+  background-color: $null;
+}
+
+.title::after{
+  content: '文字'; // 字串
+  display: block; // 數值
+}
+
+// body {
+//   background-color: $bgc;
+//   color: $fontcolor;
+//   font-size: $fontSize;
+// }
+
+// header{
+//   height: $headerH;
+//   width: 100%;
+// }
+
+// 變數位置
+$width: 100px; //全域變數
+
+.model{
+  $width: 20px !default; // 區域變數，加!default會讓外面的變數比裡面還大
+  width: $width;
+}
+
+// ========== nesting ==========
+body{
+  .wrapper{
+    header{
+      height: 120px;
+      logo{
+        width: 100px;
+        height: 100px;
+      }
+    }
+    footer{
+      height: 300px;
+    }
+  }
+}
+
+// 偽元素寫法
+// a{
+//   color: red;
+// }
+
+// a:hove{
+//   color: blue;
+// }
+
+a{
+  color: red;
+  &:hover{
+    color: blue;
+  }
+  &::after{
+    content: 'after';
+  }
+  &::before{
+    content: 'before';
+  }
+}
+
+
+
+
+
+
+// 呼叫函式
+.box{
+  @include marginTop(50px);
+  @include marginAuto();
+}
+
+.box01{
+  @include marginTop(10px);
+};
+
+
+
+
+.box_rect{
+  @include rect(200px, 300px, #f7c4c4);
+}
+
+.box_rects{
+  @include rect_new(100vw, 100vh);
+}
+
+
+
+// ========== null ==========
+
+
+.btn-wide{
+  @include btn(150px , 10px , true , rgb(118, 252, 169));
+  margin-bottom: 10px;
+}
+
+.btn-default{
+  @include btn(120px , 10px , false , rgb(90, 134, 228));
+}
+
+
+// 函式
+// @mixin btn($class , $w , $padding , $r , $bgc:null){
+//   #{class}{ // 不建議用這方法
+//     width: $w;
+//     padding: $padding 0;
+//     text-align: center;
+//     cursor: pointer;
+//     border: 1px solid black;
+//     background-color: $bgc;
+  
+//     @if $r == true{
+//       border-radius: 5px;
+//     }
+  
+//     &:hover{
+//       color: red;
+//       // background-color: darken($bgc , 20); //darken變暗
+//       background-color: lighten($bgc , 20); // lighten變亮
+//     }
+
+//   }
+// }
+
+// 呼叫
+// @include btn('.btn-wide' , 150px , 10px , true , rgb(118, 252, 169));
+
+
+@include textbox('.text' , 20px){
+  font-size: 20px;
+};
+
+
+// ========== 字串轉型 ==========
+$fontclass: '.aa'; // clsss
+$attr: margin; // 屬性
+$path: aa; // 路徑名字
+
+#{$fontclass}{
+  #{$attr}: 40px;
+  background-image: url('./images/#{$path}.jpg');
+}
+
+
+
+// 運算（注意單位）+ 運算函式
+
+$var: 10;
+
+.aa{
+  width: $var + 10;
+  height: 10 - 4 + px;
+  margin: 10px * 5;
+  font: round(24 / 18) + px; // 除要加括弧，另外寫單位
+}
+
+$w: 100;
+
+.bb{
+  @if($w <= 50){
+    width: $w + px;
+  }@else if($w <= 70){
+    width: ($w / 2) + px;
+  }@else{
+    width: $w * 2 + pw;
+  }
+}
+
+
+
+// for 迴圈
+
+@for $i from 1 through 10{
+  .box-#{$i}{
+    width: $i * 1px;
+  }
+}
+
+
+// 運用
+
+
+// @include push(5);
+
+
+
+// @include pushall(2 , top){
+//   display: block;
+// };
+// @include pushall(2 , bottom);
+
+
+
+.row{
+  display: flex;
+  // .col-1{
+  //   width: (1/12) * 100%;
+  // }
+  // .col-2{
+  //   width: (2/12) * 100%;
+  // }
+  // @include grid(18);
+}
+
+
+// 呼叫pushall();
+// @include pushall(20,"top");
+
+// @include margin(100 , top){
+//   @include marginAuto();
+// };
+
+
+
+
+
+// $img: box , a , b; //可不加逗號
+$img: box a b;
+
+
+@include img(box a b){ //放裡面不能加逗號
+  width: 100px;
+  height: 80px;
+}
+
+@include img(banner2 , png){
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  @include marginAuto();
+  position: relative;
+}
+
+
+$imgname : slider1 slider2 slider3;
+
+
+
+
+.v1 {
+  @include layout(full ,400px);
+  @include theme(false, pink);
+  margin-bottom: 100px;
+  
+}
+
+.wrapper { // 再包一個 = 加上這個class
+  .banner{
+    @include layout(1200px, 500px);
+    // $imgname : slider1 slider2 slider3; // 也可放裡面
+    @include img($imgname , png){
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+
+@include title_module($title_h){
+  color: #333;
+}
+
+
+@include colormap($color-map, rgb(193, 255, 168));
+
+
+
+
+// ========== @extend ==========
+
+.blue{
+  border-color: #0008ff;
+}
+
+.yellow{
+  background-color: #f3ff0f;
+}
+
+
+
+.box-default{
+  width: 100px;
+  height: 100px;
+  @extend .yellow
+};
+
+
+
+%border_1px{ // 用%不會被顯示，只會顯示被帶入的(下下面那個CSS)
+  border: 1px solid #ff2a2a;
+};
+
+.box-warning{
+  width: 300px;
+  height: 300px;
+  @extend .yellow;
+  @extend %border_1px;
+}

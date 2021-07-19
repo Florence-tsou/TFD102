@@ -14,6 +14,7 @@
   margin: 0 auto;
 }
 
+// : 預設值
 @mixin rect($w: 100px , $h: 100px, $bgc: #fff){
   width: $w;
   height: $h;
@@ -107,6 +108,7 @@
   }
 }
 
+// $img : box a b c bg; // list
 @mixin img($img , $style:jpg) { // :預設，未呼叫就用這個
   @each $a in $img{ // a 從 img 取得
     .#{$a}{
@@ -116,3 +118,77 @@
     }
   }
 }
+
+// @include layout(full滿版 , 高度 )  如果不是滿版的話 帶數值進去即可
+@mixin layout($theme, $h) {
+  @if $theme == full{
+    width: 100vw;
+    height: $h;
+    display: block;
+    position: relative;
+  }@else{
+    width: $theme;
+    height: $h;
+    @include marginAuto();
+  }
+}
+
+// 樣板的色塊 @include theme(true or false) true 會反轉顏色（字體顏色 背景色）
+@mixin theme($light-theme: true , $bgcolor:null){
+  @if $light-theme {
+    background-color: lighten($bgc , 100);
+    color: darken($fontcolor , 100);
+  }@else{
+    background-color: $bgcolor;
+  }
+}
+
+
+// 使用h1 ~ h5字體大小 @include
+@mixin title_module($title_h) {
+  @each $k , $v in $title_h{
+    #{$k}{
+      font-size: $v;
+      @content;
+    }
+  }
+}
+
+
+// color map @include colormap(顏色map 對應) ()
+@mixin colormap($color-map , $bgc:#000) {
+  @each $k , $v in $color-map{
+    .text-#{$k} {
+      color : $v;
+      background-color: $bgc;
+      padding: 10px 40px;
+      transition: .2s all ease-in-out;
+      cursor: pointer;
+
+      &:hover{
+        background-color: lighten(#000, 20);
+      }
+    }
+  }
+}
+
+
+
+
+@mixin mobile() {
+  @media all and (max-width : $mobile){
+    @content;
+  }
+};
+
+@mixin tablet() {
+  @media all and (min-width : $mobile + 1px) and (max-width: $tablet){
+    @content;
+  }
+};
+
+@mixin desktop() {
+  @media all and (min-width : $desktop + 1px){
+    @content;
+  }
+};

@@ -1,0 +1,28 @@
+body{
+  font-size: 30px;
+  color: #000;
+}
+
+@include mobile(){
+  body{
+    font-size: 48px;
+    color: rgb(235, 75, 75);
+    background-color: rgb(85,255,0);
+  }
+}
+
+@include tablet(){
+  body{
+    font-size: 48px;
+    color: rgb(235, 184, 75);
+    background-color: rgb(63, 24, 82);
+  }
+}
+
+@include desktop(){
+  body{
+    font-size: 48px;
+    color: rgb(118, 75, 235);
+    background-color: rgb(226, 147, 147);
+  }
+}

@@ -1,0 +1,16 @@
+@include tablet{
+  .text {
+    font-size: 40px;  
+  }  
+  h1 {
+    font: 50px;
+  }
+}
+
+
+
+@include mobile {
+  .text {
+    font-size: 20px; 
+  } 
+}

@@ -1,0 +1,26 @@
+{
+  "name": "tfd102",
+  "version": "1.0.0",
+  "description": "tfd102教學 gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Florence-tsou/TFD102.git"
+  },
+  "keywords": [],
+  "author": "Florence",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Florence-tsou/TFD102/issues"
+  },
+  "homepage": "https://github.com/Florence-tsou/TFD102#readme",
+  "dependencies": {
+    "bootstrap-sass": "^3.4.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
