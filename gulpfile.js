@@ -57,13 +57,16 @@ exports.sync = parallel(missionA , missionB);
 
 // 壓縮 js
 
-const uglify = require('gulp-uglify'); // 先置入官方給的壓縮指令
+const uglify = require('gulp-uglify'); // 把套件require進來
 
 function ugjs(){
   // 選擇要壓縮的檔案，中間經過pipe壓縮打包，最後產出到要的地方
-  return src('js/scripts.js'). // src 來源檔案
-  pipe(uglify()). // 壓縮、打包檔案
-  pipe(dest('js/minify/')) // dest 目的地，沒這資料夾他會自己幫你建
+  return src('js/scripts.js') // src 來源檔案
+  .pipe(uglify()) // 壓縮、打包檔案
+  .pipe(rename({ // 更換檔名
+    extname: '.min.css'
+  }))
+  .pipe(dest('js/minify/')) // dest 目的地，沒這資料夾他會自己幫你建
 };
 
 exports.taskjs = ugjs;
@@ -89,14 +92,19 @@ exports.alltask = parallel(ugjs , mincss);
 
 
 
-// 拷貝多個檔案
+// 拷貝多個檔案、更換檔名
+
+const rename = require('gulp-rename'); // 換檔名才需要
 
 function copy(){
   // return src('sass/*.css') // 打包所有附檔名為css
   // return src(['sass/*.css' , 'sass/*.scss']) // 打包所有副檔名為css及scss
-  // return src(['sass/*.css' , '!sass/font.css']) //不要被打包的，就在第二個參數寫 !檔名
+  return src(['sass/*.css' , '!sass/font.css']) //不要被打包的，就在第二個參數寫 !檔名
   // return src('sass/*.*') // 打包全部檔案，所有附檔名
-  return src('sass/*.*' , 'sass/**/*.scss') // 連其他資料夾裡所有的scss都打包
+  // return src('sass/*.*' , 'sass/**/*.scss') // 連其他資料夾裡所有的scss都打包
+  .pipe(rename({ // 更換檔名
+    extname: '.min.css'
+  }))
   .pipe(dest('css/'))
 };
 
