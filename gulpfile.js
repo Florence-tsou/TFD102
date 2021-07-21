@@ -61,7 +61,7 @@ const uglify = require('gulp-uglify'); // 把套件require進來
 
 function ugjs(){
   // 選擇要壓縮的檔案，中間經過pipe壓縮打包，最後產出到要的地方
-  return src('js/scripts.js') // src 來源檔案
+  return src('./src/js/scripts.js') // src 來源檔案
   .pipe(uglify()) // 壓縮、打包檔案
   .pipe(rename({ // 更換檔名
     extname: '.min.css'
@@ -78,9 +78,9 @@ exports.taskjs = ugjs;
 const cleanCSS = require('gulp-clean-css');
 
 function mincss(){
-  return src('sass/style.css')
+  return src('./src/sass/style.css')
   .pipe(cleanCSS({compatibility: 'ie10'}))
-  .pipe(dest('css/'))
+  .pipe(dest('./src/css/'))
 }
 
 exports.css = mincss;
@@ -97,15 +97,15 @@ exports.alltask = parallel(ugjs , mincss);
 const rename = require('gulp-rename'); // 換檔名才需要
 
 function copy(){
-  // return src('sass/*.css') // 打包所有附檔名為css
-  // return src(['sass/*.css' , 'sass/*.scss']) // 打包所有副檔名為css及scss
-  return src(['sass/*.css' , '!sass/font.css']) //不要被打包的，就在第二個參數寫 !檔名
-  // return src('sass/*.*') // 打包全部檔案，所有附檔名
-  // return src('sass/*.*' , 'sass/**/*.scss') // 連其他資料夾裡所有的scss都打包
+  // return src('./src/sass/*.css') // 打包所有附檔名為css
+  // return src(['./src/sass/*.css' , './src/sass/*.scss']) // 打包所有副檔名為css及scss
+  return src(['./src/sass/*.css' , '!./src/sass/font.css']) //不要被打包的，就在第二個參數寫 !檔名
+  // return src('./src/sass/*.*') // 打包全部檔案，所有附檔名
+  // return src('./src/sass/*.*' , './src/sass/**/*.scss') // 連其他資料夾裡所有的scss都打包
   .pipe(rename({ // 更換檔名
     extname: '.min.css'
   }))
-  .pipe(dest('css/'))
+  .pipe(dest('./src/css/'))
 };
 
 exports.move = copy;
@@ -117,12 +117,26 @@ exports.move = copy;
 const fileinclude = require('gulp-file-include');
 
 function html(){
-  return src('*.html') // 根目錄下的所有html
+  return src('./src/*.html') // 根目錄下的所有html
   .pipe(fileinclude({ // 官方格式，若裡面有include，打包完後會把include的東西串進去
     prefix: '@@',
     basepath: '@file'
   }))
-  .pipe(dest('dist'))
+  .pipe(dest('./src/dist'))
 }
 
-exports.h = html
+exports.h = html;
+
+
+
+// sass gulp
+
+const sass = require('gulp-sass')(require('sass'));
+
+function sassstyle(){
+  return src('./src/sass/*.scss')
+  .pipe(sass.sync().on('error', sass.logError))
+  .pipe(dest('./dist/css'))
+}
+
+exports.style = sassstyle
