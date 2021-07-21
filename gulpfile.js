@@ -66,7 +66,7 @@ function ugjs(){
   .pipe(rename({ // 更換檔名
     extname: '.min.css'
   }))
-  .pipe(dest('js/minify/')) // dest 目的地，沒這資料夾他會自己幫你建
+  .pipe(dest('./dist/minify/')) // dest 目的地，沒這資料夾他會自己幫你建
 };
 
 exports.taskjs = ugjs;
@@ -122,7 +122,7 @@ function html(){
     prefix: '@@',
     basepath: '@file'
   }))
-  .pipe(dest('./src/dist'))
+  .pipe(dest('./dist'))
 }
 
 exports.h = html;
@@ -137,11 +137,89 @@ var sass = require('gulp-sass')(require('sass'));
 // 讓CSS可以追朔SASS要加 ↓
 const sourcemaps = require('gulp-sourcemaps');
 
-function sassstyle(){
+function sassmap(){
   return src('./src/sass/*.scss')
   .pipe(sourcemaps.init())
   .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
   .pipe(sourcemaps.write())
   .pipe(dest('./dist/css'))
 }
-exports.style = sassstyle
+
+function sassstyle(){
+  return src('./src/sass/*.scss')
+  .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+  .pipe(dest('./dist/css'))
+}
+
+
+exports.style_online = sassstyle // 上線
+exports.style = sassmap // dev
+
+// ES6
+// exports.style = () => 
+//         src('./src/sass/*.scss')
+//        .pipe(sass.sync().on('error', sass.logError))
+//        .pipe(dest('./dist/css'))
+
+
+
+
+// 監看的路徑若有變動，會自動去執行function，就不用一直去輸入指令
+// function watchS(){
+//   watch(['./src/sass/*.scss' , './src/sass/&&/*.scss'] , sassmap);
+//   watch(['./src/*.html' , './src/**/*.html'] , html);
+//   watch(['./src/js/*.js'] , ugjs);
+// }
+
+// exports.w = watchS;
+
+exports.watchS = () =>
+  watch(['./src/sass/*.scss' , './src/sass/&&/*.scss'] , sassmap);
+  watch(['./src/*.html' , './src/**/*.html'] , html);
+  watch(['./src/js/*.js'] , ugjs);
+
+
+
+
+
+// 壓縮圖片
+const imagemin = require('gulp-imagemin');
+
+function minify(){
+  return src('src/images/*.*')
+  .pipe(imagemin([
+    imagemin.optipng({optimizationLevel: 5}) // 壓縮品質      quality越低 -> 壓縮越大 -> 品質越差 
+  ]))
+  .pipe(dest('./dist/images'))
+}
+
+// imagemin.gifsicle({interlaced: true}), // gif  壓縮
+// imagemin.mozjpeg({quality: 75, progressive: true}), // jpg  壓縮
+// imagemin.optipng({optimizationLevel: 5}), // png 壓縮
+
+exports.img = minify
+
+
+
+
+// 自動開啟瀏覽器(同liveserver)
+
+const browserSync = require('browser-sync');
+const reload = browserSync.reload;
+
+
+function browser(done){
+  browserSync.init({
+    server: {
+      baseDir: "./dist",
+      index: "index.html"
+    },
+    port: 3000
+  });
+  watch(['./src/sass/*.scss' , './src/sass/&&/*.scss'] , sassmap).on('change' , reload);
+  watch(['./src/*.html' , './src/**/*.html'] , html).on('change' , reload);
+  watch(['./src/js/*.js'] , ugjs).on('change' , reload);
+  done();
+}
+
+exports.bsync = browser

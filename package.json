@@ -4,7 +4,10 @@
   "description": "tfd102教學 gulp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "載回node_modules": "npm i",
+    "安裝套件": "npm install",
+    "壓縮圖片": "gulp img",
+    "監看": "gulp watchS"
   },
   "repository": {
     "type": "git",
@@ -21,9 +24,11 @@
     "bootstrap-sass": "^3.4.1"
   },
   "devDependencies": {
+    "browser-sync": "^2.27.4",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-file-include": "^2.3.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
